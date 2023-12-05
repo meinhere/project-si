@@ -10323,3 +10323,11 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+@media print {
+  .sidebar,
+  .btn-print,
+  .footer {
+    display: none;
+  }
+}

@@ -57,7 +57,12 @@ function countScore($id) {
     $skor *= pow($kode[$i], $bobot);
   } 
 
-  return round($skor, 4);
+  $hasil = [
+    "kode" => $kode,
+    'skor' => round($skor, 4)
+  ];
+
+  return $hasil;
 }
 
 function countResult($id_siswa) {
@@ -65,10 +70,12 @@ function countResult($id_siswa) {
   $total_score = 0;
   
   foreach ($siswa as $s) {
-    $total_score += countScore($s['id_siswa']);
+    $skor = countScore($s['id_siswa']);
+    $total_score += $skor['skor'];
   }
+  $skor = countScore($id_siswa);
 
-  return round(countScore($id_siswa) / $total_score, 4);
+  return round($skor['skor'] / $total_score, 4);
 }
 
 
