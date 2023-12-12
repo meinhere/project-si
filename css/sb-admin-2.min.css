@@ -10325,9 +10325,12 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 @media print {
+  .table-responsive {
+    overflow-x: hidden;
+  }
   .sidebar,
   .btn-print,
-  .footer {
+  footer {
     display: none;
   }
 }

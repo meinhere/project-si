@@ -63,7 +63,12 @@ if (isset($_POST['bobot'])) {
                     <span class="invalid-feedback"><?= $errors['bobot' . $key]; ?></span>
                   </td>
                   <td><?= number_format(countNormalization($k['bobot']), 2); ?></td>
-                  <td><?= $k['atribut']; ?></td>
+                  <td>
+                    <select name="atribut[]" id="atribut" class="form-control">
+                      <option value="Benefit" <?= $k['atribut'] == "Benefit" ? "selected" : ""; ?>>Benefit</option>
+                      <option value="Cost" <?= $k['atribut'] == "Cost" ? "selected" : ""; ?>> Cost</option>
+                    </select>
+                  </td>
                 </tr>
                 <?php endforeach; ?>
               </tbody>

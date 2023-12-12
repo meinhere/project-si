@@ -21,7 +21,7 @@ $kriteria = getAllCriteria();
     Berikut adalah hasil perhitungan dari data tiap siswa sesuai
     dengan bobot yang ada.
   </p>
-  <button class="btn btn-primary mb-2 btn-print" onclick="window.print()">
+  <button class="btn btn-primary mb-2 btn-print" onclick="printAnotherPage()">
     <i class="fa fa-print"></i>
     Cetak
   </button>
@@ -68,6 +68,18 @@ $kriteria = getAllCriteria();
     </div>
   </div>
 </div>
+<script>
+  function printAnotherPage() {
+      // Open another window or tab with the page you want to print
+      var newWindow = window.open('print.php', '_blank');
+
+      // Wait for the new window to finish loading
+      newWindow.onload = function() {
+          // Trigger the print dialog for the new window
+          newWindow.print();
+      };
+  }
+</script>
 <!-- /.container-fluid -->
 <?php include "templates/footer.php" ?>
         

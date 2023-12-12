@@ -12,6 +12,18 @@ function getAllResultByDesc() {
   }
 }
 
+function getAllResultByDescAndLimit($limit) {
+  try {
+      $statement = DB->prepare("SELECT * FROM hasil INNER JOIN siswa ON siswa.id_siswa = hasil.id_siswa ORDER BY hasil_akhir DESC LIMIT :limit");
+      $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
+      $statement->execute();
+      return $statement->fetchAll(PDO::FETCH_ASSOC);
+  }
+  catch(PDOException $err){
+      echo $err->getMessage();
+  }
+}
+
 function insertResult() {
   $id_siswa = DB->lastInsertId();
   $skor = countScore($id_siswa);
@@ -20,7 +32,7 @@ function insertResult() {
   try {
     $statement = DB->prepare("INSERT INTO hasil VALUES(NULL, :id_siswa, :skor, :hasil_akhir)");
     $statement->bindValue(':id_siswa', $id_siswa);
-    $statement->bindValue(':skor', $skor);
+    $statement->bindValue(':skor', $skor['skor']);
     $statement->bindValue(':hasil_akhir', $hasil_akhir);
     $statement->execute();
   }
@@ -40,7 +52,7 @@ function updateResult($id_siswa) {
                               hasil_akhir = :hasil_akhir 
                               WHERE id_siswa = :id_siswa");
     $statement->bindValue(':id_siswa', $id_siswa);
-    $statement->bindValue(':skor', $skor);
+    $statement->bindValue(':skor', $skor['skor']);
     $statement->bindValue(':hasil_akhir', $hasil_akhir);
     $statement->execute();
   }
